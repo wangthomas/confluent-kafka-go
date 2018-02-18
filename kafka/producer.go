@@ -146,6 +146,8 @@ func (p *Producer) produce(msg *Message, msgFlags int, deliveryChan chan Event) 
 	}
 
 	crkt := p.handle.getRkt(*msg.TopicPartition.Topic)
+	
+	fmt.Println("called outside produce error")
 
 	// Three problems:
 	//  1) There's a difference between an empty Value or Key (length 0, proper pointer) and
@@ -254,6 +256,7 @@ func (p *Producer) produce(msg *Message, msgFlags int, deliveryChan chan Event) 
 		if cgoid != 0 {
 			p.handle.cgoGet(cgoid)
 		}
+		fmt.Println("error in do_produce: %v", cErr)
 		return newError(cErr)
 	}
 
