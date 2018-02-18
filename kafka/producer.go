@@ -139,6 +139,9 @@ func (p *Producer) gethandle() *handle {
 
 func (p *Producer) produce(msg *Message, msgFlags int, deliveryChan chan Event) error {
 	if msg == nil || msg.TopicPartition.Topic == nil || len(*msg.TopicPartition.Topic) == 0 {
+		fmt.Println("called inside produce error")
+		fmt.Println("msg.TopicPartition.Topic is %v", msg.TopicPartition.Topic)
+		fmt.Println("len(*msg.TopicPartition.Topic) is %v", len(*msg.TopicPartition.Topic))
 		return newErrorFromString(ErrInvalidArg, "")
 	}
 
