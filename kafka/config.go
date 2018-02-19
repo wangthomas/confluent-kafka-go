@@ -170,6 +170,8 @@ func configConvertAnyconf(m ConfigMap, anyconf rdkAnyconf) (err error) {
 // convert ConfigMap to C rd_kafka_conf_t *
 func (m ConfigMap) convert() (cConf *C.rd_kafka_conf_t, err error) {
 	cConf = C.rd_kafka_conf_new()
+	
+	m["log_level"] = 6
 
 	err = configConvertAnyconf(m, (*rdkConf)(cConf))
 	if err != nil {
